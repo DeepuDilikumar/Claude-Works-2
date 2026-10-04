@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Big Shoulders", "Arial Narrow", sans-serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-night: #000000;      /* the unlit sky above the track */
+  --color-floodlight: #eef1ec; /* cool white of the track lights */
+  --color-concrete: #9a9d97;   /* the retaining wall */
+  --color-flag: #ffd23f;       /* caution-flag yellow, also the car's pinstripe */
+  --color-smoke: #2a2b29;      /* tire smoke, used for hairlines */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-night font-sans text-floodlight antialiased;
+    overflow-x: hidden;
+  }
+  #root {
+    width: 100%;
+    min-height: 100svh;
+  }
+  /* Keeps section headings clear of the fixed nav when jumping to an anchor */
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+  /* No page scrolling behind the open demo dialog */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-flag);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
